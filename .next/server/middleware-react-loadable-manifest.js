@@ -1,0 +1,1 @@
+self.__REACT_LOADABLE_MANIFEST="{\"index.js -> gojs\":{\"id\":\"index.js -> gojs\",\"files\":[\"static/chunks/node_modules_gojs_release_go-debug_mjs.js\"]}}"

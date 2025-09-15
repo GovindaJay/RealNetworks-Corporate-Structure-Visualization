@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>RealNetworks LLC</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  
+<div style="position:absolute; top:10px; right:10px; z-index:999;">
+  <button onclick="window.location.href='/'" style="padding:8px 16px; font-size:14px; cursor:pointer; background:#007bff; color:white; border:none; border-radius:4px;">Home</button>
+</div>
+
+  <div class="main-content">
+    <h1 id="entity-title">RealNetworks LLC</h1>
+    <div class="entity-table-container">
+      <table class="entity-table">
+        <tr>
+          <td class="label">Entity Name</td>
+          <td class="value">RealNetworks LLC</td>
+        </tr>
+        <tr>
+          <td class="label">Address</td>
+          <td class="value">568 1st Avenue S. Suite 600, Seattle-WA 98134</td>
+        </tr>
+        <tr>
+          <td class="label">Entity No.</td>
+          <td class="value">
+            <span style="
+              display: inline-block;
+              width: 40px;
+              height: 40px;
+              background-color: transparent;
+              color: black;
+              border: 2px solid black;
+              border-radius: 50%;
+              text-align: center;
+              line-height: 36px;
+              font-weight: bold;
+              font-size: 16px;
+            ">70</span>
+          </td>
+        </tr>
+        <tr>
+          <td class="label">Jurisdiction / Place of Incorporation</td>
+          <td class="value">Washington</td>
+        </tr>
+        <tr>
+          <td class="label">Agent</td>
+          <td class="value">CSC</td>
+        </tr>
+        <tr>
+          <td class="label">Directors</td>
+          <td class="value">Rob Glaser<br>Chris Weaton</td>
+        </tr>
+        <tr>
+          <td class="label">Authorized Signatory</td>
+          <td class="value">Chris Wheaton</td>
+        </tr>
+        <tr>
+          <td class="label">Date of Formation</td>
+          <td class="value">7/25/2022 (Formally RealNetworks Inc. formed on 2/09/1994)</td>
+        </tr>
+        <tr>
+          <td class="label">Ownership</td>
+          <td class="value">Greater Heights LLC (100%)</td>
+        </tr>
+        <tr>
+          <td class="label">Federal Tax ID</td>
+          <td class="value">EIN # 35-2775162</td>
+        </tr>
+        <tr>
+          <td class="label">State ID</td>
+          <td class="value">UBI # 604 945 574</td>
+        </tr>
+        <tr>
+          <td class="label">Notes</td>
+          <td class="value">Foreign entities are registered in NYC and California per state requirements to have employees in those states.</td>
+        </tr>
+        <tr>
+          <td class="label">Deadlines</td>
+          <td class="value">New Jersey</td>
+          <td class="value deadline-date" data-date="2025-12-31">2025-12-31</td>
+        </tr>
+        <tr>
+          <td class="label">Deadlines</td>
+          <td class="value">Oregon</td>
+          <td class="value deadline-date" data-date="2026-03-20">2026-03-20</td>
+        </tr>
+        <tr>
+          <td class="label">Deadlines</td>
+          <td class="value">New York</td>
+          <td class="value deadline-date" data-date="2025-11-01">2025-11-01</td>
+        </tr>
+        <tr>
+          <td class="label">Deadlines</td>
+          <td class="value">California</td>
+          <td class="value deadline-date" data-date="2025-10-17">2025-10-17</td>
+        </tr>
+        <tr>
+          <td class="label">Deadlines</td>
+          <td class="value">Washington</td>
+          <td class="value deadline-date" data-date="2025-07-31">2025-07-31</td>
+        </tr>
+        <tr>
+          <td class="label">Deadlines</td>
+          <td class="value">NA</td>
+          <td class="value deadline-date" data-date="2025-12-30"></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const q = params.get("search");
+    if (q) {
+      const query = q.toLowerCase();
+      
+      // Highlight title if it matches (for global search results)
+      const title = document.getElementById("entity-title");
+      if (title.innerText.toLowerCase().includes(query)) {
+        title.classList.add("highlight");
+      }
+      
+      // Highlight table content that matches (for global search results)
+      const tableCells = document.querySelectorAll('.entity-table .value');
+      tableCells.forEach(cell => {
+        if (cell.innerText.toLowerCase().includes(query)) {
+          cell.classList.add("highlight");
+        }
+      });
+      
+      // Also check labels (for global search results)
+      const labelCells = document.querySelectorAll('.entity-table .label');
+      labelCells.forEach(cell => {
+        if (cell.innerText.toLowerCase().includes(query)) {
+          cell.classList.add("highlight");
+        }
+      });
+    }
+
+    // Deadline date color coding functionality
+    function colorCodeDeadlines() {
+      const today = new Date();
+      const deadlineDates = document.querySelectorAll('.deadline-date');
+      
+      deadlineDates.forEach(dateElement => {
+        const dateString = dateElement.getAttribute('data-date');
+        if (dateString) {
+          const deadlineDate = new Date(dateString);
+          const timeDiff = deadlineDate.getTime() - today.getTime();
+          const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+          
+          // Remove any existing color classes
+          dateElement.classList.remove('deadline-yellow', 'deadline-red');
+          
+          if (daysDiff < 0) {
+            // Past due - red
+            dateElement.classList.add('deadline-red');
+          } else if (daysDiff <= 30) {
+            // Due within 30 days - yellow
+            dateElement.classList.add('deadline-yellow');
+          }
+          // More than 30 days - no color
+        }
+      });
+    }
+
+    // Run color coding when page loads
+    document.addEventListener('DOMContentLoaded', colorCodeDeadlines);
+  </script>
+</body>
+</html>

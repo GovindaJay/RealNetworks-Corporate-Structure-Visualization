@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Muzical Ltd (UK)</title>   
+  <link rel="stylesheet" href="styles.css"> 
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2rem;
+    }
+    .highlight {
+      background-color: yellow;
+    }
+  </style>
+</head>
+<body>
+  
+<div style="position:absolute; top:10px; left:10px; z-index:999; display:flex; gap:8px;">
+  <input
+    type="text"
+    id="global-search"
+    placeholder="Search across site..."
+    style="padding:6px; font-size:14px; border:1px solid #aaa; border-radius:4px; width:240px;"
+  />
+  <button id="search-btn" style="padding:6px 10px; font-size:14px; cursor:pointer;">Search</button>
+</div>
+<div style="position:absolute; top:10px; right:10px; z-index:999;">
+  <button onclick="window.location.href='/'" style="padding:6px 12px; font-size:14px; cursor:pointer;">Home</button>
+</div>
+<script>
+  const input = document.getElementById('global-search');
+  const searchBtn = document.getElementById('search-btn');
+  const params = new URLSearchParams(window.location.search);
+  const saved = params.get('search') || localStorage.getItem('last_query');
+  if (input && saved) input.value = saved;
+
+  function doIterativeSearch() {
+    const query = input.value.trim().toLowerCase();
+    if (!query) return;
+    localStorage.setItem('last_query', query);
+    let index = Number(localStorage.getItem('search_index')) || 0;
+    const all = JSON.parse(localStorage.getItem('all_entities') || '[]');
+    const matches = all.filter(n => n.name.toLowerCase().includes(query));
+    if (matches.length > 0) {
+      const next = matches[index];
+      localStorage.setItem('search_index', (index + 1) % matches.length);
+      const encoded = encodeURIComponent(query);
+      const nextUrl = next.key === "RealNetworks"
+        ? `/?search=${encoded}`
+        : `/entities/${next.key}.html?search=${encoded}`;
+      window.location.href = nextUrl;
+    }
+  }
+
+  input.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') doIterativeSearch();
+  });
+  searchBtn.addEventListener('click', doIterativeSearch);
+
+  localStorage.setItem('all_entities', JSON.stringify([{"key": "RobGlaser", "name": "Rob Glaser (99%)"}, {"key": "GH", "name": "GH Sliver Inc. (S-Corp)"}, {"key": "GreaterHeights", "name": "Greater Heights LLC"}, {"key": "RealNetworks", "name": "RealNetworks LLC"}, {"key": "RealNetworksInvestments", "name": "RealNetworks Investments LLC (DE)"}, {"key": "GameHouseDE", "name": "GameHouse LLC (DE)"}, {"key": "RealNetworksGlobal", "name": "RealNetworks Global LLC (DE)"}, {"key": "RealNetworksUK", "name": "RealNetworks Ltd. (UK)"}, {"key": "RealNetworksKorea", "name": "RealNetworks Korea Ltd."}, {"key": "RealNetworksCroatia", "name": "RealNetworks D.O.O (Croatia)"}, {"key": "RealNetworksJapan", "name": "RealNetworks KK (Japan)"}, {"key": "RealNetworksChina", "name": "Beijing RealNetworks Technology Co. Ltd. (China)"}, {"key": "RNMusicCA", "name": "RealNetworks Digital Music California LLC (CA)"}, {"key": "ListenCom", "name": "Listen.com LLC (CA)"}, {"key": "TMAcquisition", "name": "TM Acquisition LLC"}, {"key": "GHSpain", "name": "GameHouse Spain SL"}, {"key": "RNIntHoldingsCV", "name": "RealNetworks Int. Holdings CV"}, {"key": "RNIntHoldingsBV", "name": "RN Int Holdings BV"}, {"key": "MuzicalUK", "name": "Muzical Ltd (UK)"}, {"key": "DigitalHoldingKorea", "name": "Digital Holding Asia Pacific Co. Ltd (Korea)"}, {"key": "GHIndia", "name": "RN India Pvt Ltd"}, {"key": "GHIndonesia", "name": "Widerthan Indonesia"}, {"key": "GHPH", "name": "Widerthan Philippines"}, {"key": "GH_Europe", "name": "GameHouse Europe B.V"}, {"key": "RNGMBH", "name": "RealNetworks GMBH (Austria)"}, {"key": "RNPortugal", "name": "RN Portugal"}, {"key": "RN_Acq", "name": "RN Acquisitions LLC (WA)"}, {"key": "RNBrazil", "name": "RealNetworks Brazil LTDA"}, {"key": "AratviaLATAM", "name": "Aratavia Latin America LTDA"}, {"key": "RNGames", "name": "RN Games LLC (DE)"}, {"key": "SAFRLLC", "name": "SAFR LLC (WA)"}, {"key": "SAFRWA2", "name": "SAFR WA LLC"}, {"key": "SAFROR", "name": "SAFR OR LLC"}]));
+</script>
+
+<div class="main-content">
+  <div id="entity-title">Muzicall Ltd.</div>
+  <div class="entity-table-container">
+    <table class="entity-table">
+      <tr>
+        <td class="label">Entity Name</td>
+        <td class="value">Muzicall Ltd.</td>
+      </tr>
+      <tr>
+        <td class="label">Address</td>
+        <td class="value">c/o Worldwide Corporate Advisors St Clements House, 27 Clements Lane, London, England, EC4N 7AE</td>
+      </tr>
+      <tr>
+        <td class="label">Entity No.</td>
+        <td class="value">
+          <span style="
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: transparent;
+            color: black;
+            border: 2px solid black;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 36px;
+            font-weight: bold;
+            font-size: 16px;
+          ">48</span>
+        </td>
+      </tr>
+            <tr>
+        <td class="label">Jurisdiction / Place of Incorporation</td>
+        <td class="value">Netherlands</td>
+      </tr>
+      <tr>
+        <td class="label">Agent</td>
+        <td class="value">Agile</td>
+      </tr>
+      <tr>
+        <td class="label">Directors</td>
+        <td class="value">Christopher Wheaton</td>
+      </tr>
+      <tr>
+        <td class="label">Authorized Signatory</td>
+        <td class="value">Christopher Wheaton</td>
+      </tr>
+      <tr>
+        <td class="label">Date of Formation</td>
+        <td class="value">11/14/2003</td>
+      </tr>
+      <tr>
+        <td class="label">Ownership</td>
+        <td class="value">RN International Holdings B.V. (100%)</td>
+      </tr>
+      <tr>
+        <td class="label">Federal Tax ID</td>
+        <td class="value">4964271</td>
+      </tr>
+      <tr>
+        <td class="label">State ID</td>
+        <td class="value">N/A</td>
+      </tr>
+      <tr>
+        <td class="label">Notes</td>
+        <td class="value"></td>
+      </tr>
+        <tr>
+          <td class="label">Deadlines</td>
+          <td class="value">Local Compliance Filing</td>
+          <td class="value deadline-date" data-date="2025-09-30">2025-09-30</td>
+        </tr>
+        <tr>
+          <td class="label">Deadlines</td>
+          <td class="value">NA</td>
+          <td class="value deadline-date" data-date="">NA</td>
+        </tr>
+
+    </table>
+  </div>
+</div>
+
+  <script>
+    const searchParams = new URLSearchParams(window.location.search);
+    const q = params.get("search");
+    if (q) {
+      const title = document.getElementById("entity-title");
+      if (title.innerText.toLowerCase().includes(q.toLowerCase())) {
+        title.classList.add("highlight");
+      }
+    }
+  
+    // Deadline date color coding functionality
+    function colorCodeDeadlines() {
+      const today = new Date();
+      const deadlineDates = document.querySelectorAll('.deadline-date');
+      
+      deadlineDates.forEach(dateElement => {
+        const dateString = dateElement.getAttribute('data-date');
+        if (dateString) {
+          const deadlineDate = new Date(dateString);
+          const timeDiff = deadlineDate.getTime() - today.getTime();
+          const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+          
+          // Remove any existing color classes
+          dateElement.classList.remove('deadline-yellow', 'deadline-red');
+          
+          if (daysDiff < 0) {
+            // Past due - red
+            dateElement.classList.add('deadline-red');
+          } else if (daysDiff <= 30) {
+            // Due within 30 days - yellow
+            dateElement.classList.add('deadline-yellow');
+          }
+          // More than 30 days - no color
+        }
+      });
+    }
+
+    // Run color coding when page loads
+    document.addEventListener('DOMContentLoaded', colorCodeDeadlines);
+  </script>
+</html>
